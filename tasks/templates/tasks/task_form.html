@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if task %}Edit{% else %}Add{% endif %} To-Do</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f4f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 520px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4f46e5;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4338ca;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>{% if task %}Edit{% else %}Add{% endif %} To-Do</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Subject</label>
+        <input type="text" name="subject"
+               placeholder="Enter subject"
+               value="{{ task.subject|default:'' }}"
+               required>
+
+        <label>Notes</label>
+        <textarea name="notes" rows="4"
+                  placeholder="Enter notes"
+                  required>{{ task.notes|default:'' }}</textarea>
+
+        <button type="submit">Save</button>
+    </form>
+
+    <a class="back" href="{% url 'task_list' %}">← Back to To-Do List</a>
+</div>
+
+</body>
+</html>

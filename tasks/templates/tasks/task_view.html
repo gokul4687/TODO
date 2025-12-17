@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View To-Do</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f4f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 520px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .actions {
+            margin-top: 25px;
+            text-align: right;
+        }
+
+        .actions a {
+            text-decoration: none;
+            margin-left: 12px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>{{ task.subject }}</h2>
+    <p>{{ task.notes }}</p>
+
+    <div class="actions">
+        <a href="{% url 'edit_task' task.id %}">Edit</a>
+        <a href="{% url 'task_list' %}">Back</a>
+    </div>
+</div>
+
+</body>
+</html>

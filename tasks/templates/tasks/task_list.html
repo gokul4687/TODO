@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f4f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 520px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add-btn {
+            display: block;
+            text-align: center;
+            background-color: #4f46e5;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background-color: #4338ca;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background: #f9fafb;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-subject {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>To-Do List</h2>
+
+    <!-- ADD TASK -->
+    <a href="{% url 'add_task' %}" class="add-btn">➕ Add New To-Do</a>
+
+    <!-- TASK LIST -->
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <span class="task-subject">{{ task.subject }}</span>
+
+            <div class="actions">
+                <a href="{% url 'view_task' task.id %}">View</a>
+                <a href="{% url 'edit_task' task.id %}">Edit</a>
+                <a href="{% url 'delete_task' task.id %}">Delete</a>
+            </div>
+        </li>
+        {% empty %}
+        <li class="empty">No tasks added yet</li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
